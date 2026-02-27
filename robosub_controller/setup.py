@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'basic_movement = robosub_controller.basic_movement:main',
         ],
     },
 )
