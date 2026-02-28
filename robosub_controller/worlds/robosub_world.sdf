@@ -56,11 +56,10 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
             <graded_buoyancy>
                 <default_density>1000</default_density>
                 <density_change>
-                    <above_depth>1.02</above_depth>
+                    <above_depth>0</above_depth>
                     <density>1</density>
                 </density_change>
             </graded_buoyancy>
-            <!-- <uniform_fluid_density>1000</uniform_fluid_density> -->
         </plugin>
 
 
@@ -89,7 +88,7 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
         </light>
 
         <model name='full_box_v11'>
-            <pose>0 2 0 0 0 0</pose>
+            <pose>0 2 -0.5 0 0 0</pose>
             <link name='link'>
                 <visual name='visual'>
                     <geometry>
@@ -102,7 +101,7 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                 <collision name='collision'>
                     <geometry>
                         <box>
-                            <size>0.6 0.4 0.3</size>  
+                            <size>0.6 0.4 0.33</size>
                         </box>
                     </geometry>
                 </collision>
@@ -126,7 +125,7 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                     <topic>imu</topic>
                 </sensor>
 
-                <sensor name='gpu_lidar' type='gpu_lidar'>" 
+                <sensor name='gpu_lidar' type='gpu_lidar'>
                     <pose>0 0 0 0 0 0</pose>
                     <topic>lidar</topic>
                     <update_rate>10</update_rate>
@@ -160,6 +159,108 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
             <static>false</static>
             <self_collide>false</self_collide>
 
+            <!-- Thruster links -->
+            <link name="thruster_fl">
+                <pose>0.35 0.35 0 0 0 0</pose>
+                <inertial><mass>0.1</mass></inertial>
+            </link>
+            <link name="thruster_fr">
+                <pose>0.35 -0.35 0 0 0 0</pose>
+                <inertial><mass>0.1</mass></inertial>
+            </link>
+            <link name="thruster_bl">
+                <pose>-0.35 0.35 0 0 0 0</pose>
+                <inertial><mass>0.1</mass></inertial>
+            </link>
+            <link name="thruster_br">
+                <pose>-0.35 -0.35 0 0 0 0</pose>
+                <inertial><mass>0.1</mass></inertial>
+            </link>
+
+            <!-- Thruster joints -->
+            <joint name="thruster_fl_joint" type="revolute">
+                <parent>link</parent>
+                <child>thruster_fl</child>
+                <axis>
+                    <xyz>1 0 0</xyz>
+                    <limit>
+                        <lower>-1e+16</lower>
+                        <upper>1e+16</upper>
+                    </limit>
+                </axis>
+            </joint>
+            <joint name="thruster_fr_joint" type="revolute">
+                <parent>link</parent>
+                <child>thruster_fr</child>
+                <axis>
+                    <xyz>1 0 0</xyz>
+                    <limit>
+                        <lower>-1e+16</lower>
+                        <upper>1e+16</upper>
+                    </limit>
+                </axis>
+            </joint>
+            <joint name="thruster_bl_joint" type="revolute">
+                <parent>link</parent>
+                <child>thruster_bl</child>
+                <axis>
+                    <xyz>1 0 0</xyz>
+                    <limit>
+                        <lower>-1e+16</lower>
+                        <upper>1e+16</upper>
+                    </limit>
+                </axis>
+            </joint>
+            <joint name="thruster_br_joint" type="revolute">
+                <parent>link</parent>
+                <child>thruster_br</child>
+                <axis>
+                    <xyz>1 0 0</xyz>
+                    <limit>
+                        <lower>-1e+16</lower>
+                        <upper>1e+16</upper>
+                    </limit>
+                </axis>
+            </joint>
+
+            <!-- Thruster plugins -->
+            <plugin filename="gz-sim-thruster-system"
+                name="gz::sim::systems::Thruster">
+                <namespace>buoyant_robosub</namespace>
+                <joint_name>thruster_fl_joint</joint_name>
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.1</propeller_diameter>
+                <topic>thruster_fl</topic>
+            </plugin>
+            <plugin filename="gz-sim-thruster-system"
+                name="gz::sim::systems::Thruster">
+                <namespace>buoyant_robosub</namespace>
+                <joint_name>thruster_fr_joint</joint_name>
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.1</propeller_diameter>
+                <topic>thruster_fr</topic>
+            </plugin>
+            <plugin filename="gz-sim-thruster-system"
+                name="gz::sim::systems::Thruster">
+                <namespace>buoyant_robosub</namespace>
+                <joint_name>thruster_bl_joint</joint_name>
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.1</propeller_diameter>
+                <topic>thruster_bl</topic>
+            </plugin>
+            <plugin filename="gz-sim-thruster-system"
+                name="gz::sim::systems::Thruster">
+                <namespace>buoyant_robosub</namespace>
+                <joint_name>thruster_br_joint</joint_name>
+                <thrust_coefficient>0.004422</thrust_coefficient>
+                <fluid_density>1000</fluid_density>
+                <propeller_diameter>0.1</propeller_diameter>
+                <topic>thruster_br</topic>
+            </plugin>
+
             <plugin
                 filename="gz-sim-buoyancy-engine-system"
                 name="gz::sim::systems::BuoyancyEngine">
@@ -167,10 +268,10 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                 <link_name>link</link_name>
                 <namespace>buoyant_robosub</namespace>
                 <min_volume>0.0</min_volume>
-                <neutral_volume>0.002</neutral_volume>
-                <default_volume>0.002</default_volume>
-                <max_volume>0.003</max_volume>
-                <max_inflation_rate>0.0003</max_inflation_rate>
+                <neutral_volume>0.079</neutral_volume>
+                <default_volume>0.079</default_volume>
+                <max_volume>0.15</max_volume>
+                <max_inflation_rate>0.001</max_inflation_rate>
                 <surface>1.02</surface>
             </plugin>
         </model>
