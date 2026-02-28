@@ -56,7 +56,7 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
             <graded_buoyancy>
                 <default_density>1000</default_density>
                 <density_change>
-                    <above_depth>0</above_depth>
+                    <above_depth>1.02</above_depth>
                     <density>1</density>
                 </density_change>
             </graded_buoyancy>
@@ -89,28 +89,24 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
         </light>
 
         <model name='full_box_v11'>
+            <pose>0 2 0 0 0 0</pose>
             <link name='link'>
                 <visual name='visual'>
-                <pose>0 0 0 0 0 0</pose>
                     <geometry>
                         <mesh>
-                            <uri>../models/submarine/full_box_v11.dae</uri>
+                            <uri>../models/submarine/full_box_v2.dae</uri>
                             <scale>1 1 1</scale>
                         </mesh>
                     </geometry>
                 </visual>
                 <collision name='collision'>
-                <pose>0 0 0 0 0 0</pose>
                     <geometry>
-                        <mesh>
-                            <uri>../models/submarine/full_box_v11.dae</uri>
-                            <scale>1 1 1</scale>
-                        </mesh>
+                        <box>
+                            <size>0.6 0.4 0.3</size>  
+                        </box>
                     </geometry>
                 </collision>
-                <pose>0 0 0 0 0 0</pose>
                 <inertial>
-                    <pose>0 0 0 0 0 0</pose>
                     <mass>79</mass>
                     <inertia>
                         <ixx>13.1028</ixx>
@@ -130,8 +126,8 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                     <topic>imu</topic>
                 </sensor>
 
-                <sensor name='gpu_lidar' type='gpu_lidar'>" <pose relative_to='lidar_frame'>0 0 0 0
-                        0 0</pose>
+                <sensor name='gpu_lidar' type='gpu_lidar'>" 
+                    <pose>0 0 0 0 0 0</pose>
                     <topic>lidar</topic>
                     <update_rate>10</update_rate>
                     <ray>
@@ -161,8 +157,6 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                 </sensor>
             </link>
 
-            <pose>0 0 -0.5 0 0 0</pose>
-
             <static>false</static>
             <self_collide>false</self_collide>
 
@@ -177,7 +171,7 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                 <default_volume>0.002</default_volume>
                 <max_volume>0.003</max_volume>
                 <max_inflation_rate>0.0003</max_inflation_rate>
-                <surface>0</surface>
+                <surface>1.02</surface>
             </plugin>
         </model>
 
@@ -546,6 +540,23 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                         </mesh>
                     </geometry>
                 </collision>
+            </link>
+        </model>
+
+        <!--Model tasks-->
+
+        <model name="task1">
+            <static>true</static>
+            <pose>0 0 0 0 0 0</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/task1model.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
             </link>
         </model>
 
