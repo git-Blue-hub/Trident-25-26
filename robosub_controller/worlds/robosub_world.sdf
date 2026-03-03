@@ -160,40 +160,40 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
             <self_collide>false</self_collide>
 
             <!-- Thruster links -->
-            <link name="thruster_fl">
-                <pose>0.35 0.35 0 0 0 0</pose>
+            <link name="thruster_tl">
+                <pose>-0.4 -0.05 0.35 1.5708 0 0</pose>
                 <inertial><mass>0.1</mass></inertial>
             </link>
-            <link name="thruster_fr">
-                <pose>0.35 -0.35 0 0 0 0</pose>
+            <link name="thruster_tr">
+                <pose>0.4 -0.05 0.35 1.5708 0 0</pose>
                 <inertial><mass>0.1</mass></inertial>
             </link>
             <link name="thruster_bl">
-                <pose>-0.35 0.35 0 0 0 0</pose>
+                <pose>-0.4 -0.05 -0.35 1.5708 0 0</pose>
                 <inertial><mass>0.1</mass></inertial>
             </link>
             <link name="thruster_br">
-                <pose>-0.35 -0.35 0 0 0 0</pose>
+                <pose>0.4 0.05 -0.35 1.5708 0 0</pose>
                 <inertial><mass>0.1</mass></inertial>
             </link>
 
             <!-- Thruster joints -->
-            <joint name="thruster_fl_joint" type="revolute">
+            <joint name="thruster_tl_joint" type="revolute">
                 <parent>link</parent>
-                <child>thruster_fl</child>
+                <child>thruster_tl</child>
                 <axis>
-                    <xyz>1 0 0</xyz>
+                    <xyz>0 1 0</xyz>
                     <limit>
                         <lower>-1e+16</lower>
                         <upper>1e+16</upper>
                     </limit>
                 </axis>
             </joint>
-            <joint name="thruster_fr_joint" type="revolute">
+            <joint name="thruster_tr_joint" type="revolute">
                 <parent>link</parent>
-                <child>thruster_fr</child>
+                <child>thruster_tr</child>
                 <axis>
-                    <xyz>1 0 0</xyz>
+                    <xyz>0 1 0</xyz>
                     <limit>
                         <lower>-1e+16</lower>
                         <upper>1e+16</upper>
@@ -204,7 +204,7 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                 <parent>link</parent>
                 <child>thruster_bl</child>
                 <axis>
-                    <xyz>1 0 0</xyz>
+                    <xyz>0 1 0</xyz>
                     <limit>
                         <lower>-1e+16</lower>
                         <upper>1e+16</upper>
@@ -215,7 +215,7 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                 <parent>link</parent>
                 <child>thruster_br</child>
                 <axis>
-                    <xyz>1 0 0</xyz>
+                    <xyz>0 1 0</xyz>
                     <limit>
                         <lower>-1e+16</lower>
                         <upper>1e+16</upper>
@@ -223,24 +223,25 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                 </axis>
             </joint>
 
+
             <!-- Thruster plugins -->
             <plugin filename="gz-sim-thruster-system"
                 name="gz::sim::systems::Thruster">
                 <namespace>buoyant_robosub</namespace>
-                <joint_name>thruster_fl_joint</joint_name>
+                <joint_name>thruster_tl_joint</joint_name>
                 <thrust_coefficient>0.004422</thrust_coefficient>
                 <fluid_density>1000</fluid_density>
                 <propeller_diameter>0.1</propeller_diameter>
-                <topic>thruster_fl</topic>
+                <topic>thruster_tl</topic>
             </plugin>
             <plugin filename="gz-sim-thruster-system"
                 name="gz::sim::systems::Thruster">
                 <namespace>buoyant_robosub</namespace>
-                <joint_name>thruster_fr_joint</joint_name>
+                <joint_name>thruster_tr_joint</joint_name>
                 <thrust_coefficient>0.004422</thrust_coefficient>
                 <fluid_density>1000</fluid_density>
                 <propeller_diameter>0.1</propeller_diameter>
-                <topic>thruster_fr</topic>
+                <topic>thruster_tr</topic>
             </plugin>
             <plugin filename="gz-sim-thruster-system"
                 name="gz::sim::systems::Thruster">
