@@ -1,0 +1,45 @@
+from ultralytics import YOLO
+import cv2
+from huggingface_hub import hf_hub_download
+
+# Download model from my hugging face repo (who_Am-1/TIDE)
+try:
+    model_path = hf_hub_download(
+        repo_id="Who-Am-1/TIDE",  # Change this to your HF repo
+        filename="best.pt"  # Change to your model filename
+    )
+except Exception as e:
+    print(f"Failed to download model: {e}")
+    raise
+
+# Load  pretrained model
+model = YOLO(model_path)
+
+# Open video using CV2
+video_path = r"C:\Users\georg\Downloads\16-01-13.mp4"
+cap = cv2.VideoCapture(video_path)
+
+if not cap.isOpened():
+    raise ValueError(f"Failed to open video! Check {video_path}")
+
+while cap.isOpened():
+    ret, frame = cap.read()
+    
+    if not ret:
+        break
+    
+    # Run inference
+    results = model(frame, conf=0.4)
+    
+    # Draw detections
+    annotated_frame = results[0].plot()
+    
+    # Display
+    cv2.imshow("YOLO Test", annotated_frame)
+    
+    # Press 'q' to quit
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv2.destroyAllWindows()

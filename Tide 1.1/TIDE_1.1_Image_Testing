@@ -1,0 +1,48 @@
+from ultralytics import YOLO
+import cv2
+import os
+from huggingface_hub import hf_hub_download
+
+# Image Path
+image_path = r"C:\Users\georg\Downloads\GH010165_MP4-0149.jpg"  # change this to specific image file you want to test
+
+# Download model from Hugging Face (only downloads once, then caches it)
+try:
+    model_path = hf_hub_download(
+        repo_id="Who-Am-1/TIDE",  # Change this to your HF repo
+        filename="best.pt"  # Change to your model filename
+    )
+except Exception as e:
+    print(f"Failed to download model: {e}")
+    raise
+
+if not os.path.exists(image_path):
+    raise FileNotFoundError(f"Image not found at {image_path}")
+
+# Load the YOLO model
+model = YOLO(model_path)
+
+# This Reads the image using cv2
+img = cv2.imread(image_path)
+if img is None:
+    raise ValueError(f"Failed to load image! Check {image_path}")
+
+# Runs the inference
+results = model(img, conf=0.4)
+annotated_img = results[0].plot()
+
+# Changes the screen width and height so it is more readable
+max_width = 1280
+max_height = 720
+h, w = annotated_img.shape[:2]
+scaling_factor = min(max_width / w, max_height / h, 1)  # don't upscale small images
+
+display_img = cv2.resize(
+    annotated_img,
+    (int(w * scaling_factor), int(h * scaling_factor))
+)
+
+# Displays the interface
+cv2.imshow("YOLO Detection", display_img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
