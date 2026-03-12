@@ -735,14 +735,71 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
         </model>
 
         <!--Cannal Task -->
-        <model name="cannalTask">
+        <model name="cannalTask_1">
             <static>true</static>
-            <pose>-5 -5 0 0 0 0</pose>
+            <pose>5 5 0 0 0 0</pose>
             <link name="link">
                 <visual name="visual">
                     <geometry>
                         <mesh>
-                            <uri>../models/tasks/cannalTask.dae</uri>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+
+        </model>
+                <model name="cannalTask_2">
+            <static>true</static>
+            <pose>5 7.5 0 0 0 0</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+                <model name="cannalTask_3">
+            <static>true</static>
+            <pose>5 10 0 0 0 0</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+                <model name="cannalTask_4">
+            <static>true</static>
+            <pose>5 12.5 0 0 0 0</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+                <model name="cannalTask_5">
+            <static>true</static>
+            <pose>5 13.5 0 0 0 1</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
                             <scale>1 1 1</scale>
                         </mesh>
                     </geometry>
@@ -750,6 +807,124 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
             </link>
         </model>
 
+        <model name="cannalTask_6">
+            <static>true</static>
+            <pose>5 13.5 0 0 0 1</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
 
+        <model name="cannalTask_7">
+            <static>true</static>
+            <pose>4 13.5 0 0 0 1.57</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+
+        <model name="cannalTask_8">
+            <static>true</static>
+            <pose>3 13.5 0 0 0 1.57</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+
+        <model name="cannalTask_9">
+            <static>true</static>
+            <pose>2 13 0 0 0 2.35619</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+
+        <model name="cannalTask_10">
+            <static>true</static>
+            <pose>2 12 0 0 0 3.14</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+
+        <model name="cannalTask_11">
+            <static>true</static>
+            <pose>2 10.5 0 0 0 3.14</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+
+        <model name="cannalTask_12">
+            <static>true</static>
+            <pose>2 8 0 0 0 3.14</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
+
+        <model name="cannalTask_13">
+            <static>true</static>
+            <pose>2 6.5 0 0 0 3.14</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/cannalTaskv2.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+            </link>
+        </model>
     </world>
 </sdf>
