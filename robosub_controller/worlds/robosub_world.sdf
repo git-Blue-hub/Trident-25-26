@@ -86,6 +86,7 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
             </attenuation>
             <direction>-0.5 0.1 -0.9</direction>
         </light>
+
         <model name='full_box_v11'>
             <pose>0 100 -0.5 0 0 0</pose>
             <link name='link'>
@@ -276,13 +277,14 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
             </plugin>
 
         </model> 
-          <model name='newModel'>
+
+        <model name='newModel'>
             <pose>0 4 -0.5 0 0 0</pose>
             <link name='link'>
                 <visual name='visual'>
                     <geometry>
                         <mesh>
-                            <uri>../models/submarine/newModel.dae</uri>
+                            <uri>../models/submarine/newModelv2.dae</uri>
                             <scale>1 1 1</scale>
                         </mesh>
                     </geometry>
@@ -294,6 +296,99 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                         </box>
                     </geometry>
                 </collision>
+
+                <!-- THRUSTER VISUALS -->
+                <!-- Forward-left thruster (BLUE) -->
+                <visual name='thruster_fl_visual'>
+                <pose>-0.10212 -0.03501 0 0.785398 1.5708 0</pose>
+                <geometry>
+                    <cylinder>
+                    <radius>0.04</radius>
+                    <length>0.04</length>
+                    </cylinder>
+                </geometry>
+                <material>
+                    <ambient>0.0 0.3 1.0 1</ambient>
+                    <diffuse>0.0 0.3 1.0 1</diffuse>
+                    <emissive>0.0 0.1 0.5 1</emissive>
+                </material>
+                </visual>
+
+                <!-- Forward-right thruster (BLUE) -->
+                <visual name='thruster_fr_visual'>
+                <pose>0.33238 -0.03501 0 2.35619 1.5708 0</pose>
+                <geometry>
+                    <cylinder>
+                    <radius>0.04</radius>
+                    <length>0.04</length>
+                    </cylinder>
+                </geometry>
+                <material>
+                    <ambient>0.0 0.3 1.0 1</ambient>
+                    <diffuse>0.0 0.3 1.0 1</diffuse>
+                    <emissive>0.0 0.1 0.5 1</emissive>
+                </material>
+                </visual>
+
+                <!-- Vertical-left thruster (ORANGE) -->
+                <visual name='thruster_vl_visual'>
+                <pose>-0.11993 0.15602 0.087913 0 0.7854 0</pose>
+                <geometry>
+                    <cylinder>
+                    <radius>0.04</radius>
+                    <length>0.04</length>
+                    </cylinder>
+                </geometry>
+                <material>
+                    <ambient>1.0 0.4 0.0 1</ambient>
+                    <diffuse>1.0 0.4 0.0 1</diffuse>
+                    <emissive>0.5 0.2 0.0 1</emissive>
+                </material>
+                </visual>
+
+                <!-- Vertical-right thruster (ORANGE) -->
+                <visual name='thruster_vr_visual'>
+                <pose>0.34095 0.15602 0.087913 0 2.35619 0</pose>
+                <geometry>
+                    <cylinder>
+                    <radius>0.04</radius>
+                    <length>0.04</length>
+                    </cylinder>
+                </geometry>
+                <material>
+                    <ambient>1.0 0.4 0.0 1</ambient>
+                    <diffuse>1.0 0.4 0.0 1</diffuse>
+                    <emissive>0.5 0.2 0.0 1</emissive>
+                </material>
+                </visual>
+
+                <!--Horizontal rear right (RED)-->
+                  <visual name='thruster_hrr_visual'>
+                    <pose>0.34531 0.33559 0 0.785398 1.5708 0</pose>
+                    <geometry>
+                    <cylinder><radius>0.04</radius><length>0.04</length></cylinder>
+                    </geometry>
+                    <material>
+                    <ambient>1.0 0.0 0.0 1</ambient>
+                    <diffuse>1.0 0.0 0.0 1</diffuse>
+                    <emissive>0.5 0.0 0.0 1</emissive>
+                    </material>
+                </visual>
+
+                <!--Horizontal rear left (RED)-->
+
+                  <visual name='thruster_hrl_visual'>
+                    <pose>-0.11829 0.33559 0 2.35619 1.5708 0</pose>
+                    <geometry>
+                    <cylinder><radius>0.04</radius><length>0.04</length></cylinder>
+                    </geometry>
+                    <material>
+                    <ambient>1.0 0.0 0.0 1</ambient>
+                    <diffuse>1.0 0.0 0.0 1</diffuse>
+                    <emissive>0.5 0.0 0.0 1</emissive>
+                    </material>
+                </visual>
+
                 <inertial>
                     <mass>79</mass>
                     <inertia>
@@ -314,36 +409,207 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                     <topic>imu</topic>
                 </sensor>
 
-                <sensor name='gpu_lidar' type='gpu_lidar'>
-                    <pose>0 0 0 0 0 0</pose>
-                    <topic>lidar</topic>
-                    <update_rate>10</update_rate>
-                    <ray>
-                        <scan>
-                            <horizontal>
-                                <samples>640</samples>
-                                <resolution>1</resolution>
-                                <min_angle>-1.396263</min_angle>
-                                <max_angle>1.396263</max_angle>
-                            </horizontal>
-                            <vertical>
-                                <samples>1</samples>
-                                <resolution>0.01</resolution>
-                                <min_angle>0</min_angle>
-                                <max_angle>0</max_angle>
-                            </vertical>
-                        </scan>
-                        <range>
-                            <min>0.08</min>
-                            <max>10.0</max>
-                            <resolution>0.01</resolution>
-                        </range>
-                    </ray>
-                    <always_on>
-                    1</always_on>
-                    <visualize>true</visualize>
-                </sensor>
             </link>
+
+            <!--Thrusters-->
+            <!-- THRUSTER LINKS & JOINTS -->
+
+            <!-- Horizontal (forward) front left-->
+            <link name='thruster_hfl_link'>
+            <pose>-0.11829 0.33559 0 2.35619 1.5708 0</pose>
+            <inertial>
+                <mass>0.001</mass>
+                <inertia><ixx>0.000143</ixx><iyy>0.000143</iyy><izz>0.000143</izz>
+                <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+            </inertial>
+            </link>
+            <joint name='thruster_hfl_joint' type='revolute'>
+            <parent>link</parent>
+            <child>thruster_hfl_link</child>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit><lower>-1e+12</lower><upper>1e+12</upper></limit>
+                <dynamics><damping>0.001</damping></dynamics>
+            </axis>
+            </joint>
+
+            <!-- Horizontal front right -->
+            <link name='thruster_hfr_link'>
+            <pose>0.34531 0.33559 0 0.785398 1.5708 0</pose>
+            <inertial>
+                <mass>0.001</mass>
+                <inertia><ixx>0.000143</ixx><iyy>0.000143</iyy><izz>0.000143</izz>
+                <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+            </inertial>
+            </link>
+            <joint name='thruster_hfr_joint' type='revolute'>
+            <parent>link</parent>
+            <child>thruster_hfr_link</child>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit><lower>-1e+12</lower><upper>1e+12</upper></limit>
+                <dynamics><damping>0.001</damping></dynamics>
+            </axis>
+            </joint>
+
+            <!-- Horizontal rear left -->
+            <link name='thruster_hrl_link'>
+            <pose>-0.10212 -0.03501 0 0.785398 1.5708 0</pose>
+            <inertial>
+                <mass>0.001</mass>
+                <inertia><ixx>0.000143</ixx><iyy>0.000143</iyy><izz>0.000143</izz>
+                <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+            </inertial>
+            </link>
+            <joint name='thruster_hrl_joint' type='revolute'>
+            <parent>link</parent>
+            <child>thruster_hrl_link</child>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit><lower>-1e+12</lower><upper>1e+12</upper></limit>
+                <dynamics><damping>0.001</damping></dynamics>
+            </axis>
+            </joint>
+
+            <!-- Horizontal rear right -->
+            <link name='thruster_hrr_link'>
+            <pose>0.33238 -0.03501 0 2.35619 1.5708 0</pose>
+            <inertial>
+                <mass>0.001</mass>
+                <inertia><ixx>0.000143</ixx><iyy>0.000143</iyy><izz>0.000143</izz>
+                <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+            </inertial>
+            </link>
+            <joint name='thruster_hrr_joint' type='revolute'>
+            <parent>link</parent>
+            <child>thruster_hrr_link</child>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit><lower>-1e+12</lower><upper>1e+12</upper></limit>
+                <dynamics><damping>0.001</damping></dynamics>
+            </axis>
+            </joint>
+
+            <!-- Vertical left -->
+            <link name='thruster_vl_link'>
+            <pose>-0.11993 0.15602 0.087913 0 0.7854 0</pose>
+            <inertial>
+                <mass>0.001</mass>
+                <inertia><ixx>0.000143</ixx><iyy>0.000143</iyy><izz>0.000143</izz>
+                <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+            </inertial>
+            </link>
+            <joint name='thruster_vl_joint' type='revolute'>
+            <parent>link</parent>
+            <child>thruster_vl_link</child>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit><lower>-1e+12</lower><upper>1e+12</upper></limit>
+                <dynamics><damping>0.001</damping></dynamics>
+            </axis>
+            </joint>
+
+            <!-- Vertical right -->
+            <link name='thruster_vr_link'>
+            <pose>0.34095 0.15602 0.087913 0 2.35619 0</pose>
+            <inertial>
+                <mass>0.001</mass>
+                <inertia><ixx>0.000143</ixx><iyy>0.000143</iyy><izz>0.000143</izz>
+                <ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+            </inertial>
+            </link>
+            <joint name='thruster_vr_joint' type='revolute'>
+            <parent>link</parent>
+            <child>thruster_vr_link</child>
+            <axis>
+                <xyz>0 0 1</xyz>
+                <limit><lower>-1e+12</lower><upper>1e+12</upper></limit>
+                <dynamics><damping>0.001</damping></dynamics>
+            </axis>
+            </joint>
+
+
+            <!-- ═══ THRUSTER PLUGINS ═══ -->
+
+            <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+            <namespace>buoyant_robosub</namespace>
+            <joint_name>thruster_hfl_joint</joint_name>
+            <thrust_coefficient>0.004422</thrust_coefficient>
+            <fluid_density>1025</fluid_density>
+            <propeller_diameter>0.1</propeller_diameter>
+            <velocity_control>true</velocity_control>
+            <use_angvel_cmd>false</use_angvel_cmd>
+            <topic>thruster_hfl</topic>
+            </plugin>
+
+            <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+            <namespace>buoyant_robosub</namespace>
+            <joint_name>thruster_hfr_joint</joint_name>
+            <thrust_coefficient>0.004422</thrust_coefficient>
+            <fluid_density>1025</fluid_density>
+            <propeller_diameter>0.1</propeller_diameter>
+            <velocity_control>true</velocity_control>
+            <use_angvel_cmd>false</use_angvel_cmd>
+            <topic>thruster_hfr</topic>
+            </plugin>
+
+            <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+            <namespace>buoyant_robosub</namespace>
+            <joint_name>thruster_hrl_joint</joint_name>
+            <thrust_coefficient>0.004422</thrust_coefficient>
+            <fluid_density>1025</fluid_density>
+            <propeller_diameter>0.1</propeller_diameter>
+            <velocity_control>true</velocity_control>
+            <use_angvel_cmd>false</use_angvel_cmd>
+            <topic>thruster_hrl</topic>
+            </plugin>
+
+            <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+            <namespace>buoyant_robosub</namespace>
+            <joint_name>thruster_hrr_joint</joint_name>
+            <thrust_coefficient>0.004422</thrust_coefficient>
+            <fluid_density>1025</fluid_density>
+            <propeller_diameter>0.1</propeller_diameter>
+            <velocity_control>true</velocity_control>
+            <use_angvel_cmd>false</use_angvel_cmd>
+            <topic>thruster_hrr</topic>
+            </plugin>
+
+            <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+            <namespace>buoyant_robosub</namespace>
+            <joint_name>thruster_vl_joint</joint_name>
+            <thrust_coefficient>0.004422</thrust_coefficient>
+            <fluid_density>1025</fluid_density>
+            <propeller_diameter>0.1</propeller_diameter>
+            <velocity_control>true</velocity_control>
+            <use_angvel_cmd>false</use_angvel_cmd>
+            <topic>thruster_vl</topic>
+            </plugin>
+
+            <plugin filename="gz-sim-thruster-system" name="gz::sim::systems::Thruster">
+            <namespace>buoyant_robosub</namespace>
+            <joint_name>thruster_vr_joint</joint_name>
+            <thrust_coefficient>0.004422</thrust_coefficient>
+            <fluid_density>1025</fluid_density>
+            <propeller_diameter>0.1</propeller_diameter>
+            <velocity_control>true</velocity_control>
+            <use_angvel_cmd>false</use_angvel_cmd>
+            <topic>thruster_vr</topic>
+            </plugin>
+            <!--Bouyancy-->
+            <plugin
+                filename="gz-sim-buoyancy-engine-system"
+                name="gz::sim::systems::BuoyancyEngine">
+
+                <link_name>link</link_name>
+                <namespace>buoyant_robosub</namespace>
+                <min_volume>0.0</min_volume>
+                <neutral_volume>0.079</neutral_volume>
+                <default_volume>0.079</default_volume>
+                <max_volume>0.15</max_volume>
+                <max_inflation_rate>0.001</max_inflation_rate>
+                <surface>1.02</surface>
+            </plugin>
 
             <static>false</static>
             <self_collide>false</self_collide>
