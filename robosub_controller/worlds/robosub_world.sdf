@@ -275,7 +275,7 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                 <surface>1.02</surface>
             </plugin>
 
-        </model> 
+        </model>
           <model name='newModel'>
             <pose>0 4 -0.5 0 0 0</pose>
             <link name='link'>
@@ -924,6 +924,22 @@ gz topic -t "/model/robosub/joint/propeller_joint/cmd_force" -m gz.msgs.Double -
                         </mesh>
                     </geometry>
                 </visual>
+            </link>
+        </model>
+
+       <model name="task_3">
+            <static>true</static>
+            <pose>3.0 -4.0 -0.848 0 0 0</pose>
+            <link name="link">
+                <visual name="visual">
+                    <geometry>
+                        <mesh>
+                            <uri>../models/tasks/task3bin.dae</uri>
+                            <scale>1 1 1</scale>
+                        </mesh>
+                    </geometry>
+                </visual>
+
             </link>
         </model>
     </world>
